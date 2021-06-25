@@ -1,0 +1,90 @@
+<!-- <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script>
+        const send = () => {
+            let count=10
+            setInterval(() => {
+                 if(count > 0){
+                    count = count - 1
+                    document.getElementById("number2").innerText = count
+            }
+        }, 1000)
+        }
+
+
+    </script>
+    <title>타이머</title>
+</head>
+<body>
+    <span>000000</span>
+    <button class="number1" onclick="send()">인증번호 전송</button>
+    <div></div><span id="number2">00</span>
+    <span><button>인증완료</button></span></div>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script>
+        const send = () => {
+            
+            const token = String(Math.floor(Math.random() * 100000)).padStart(6, "0")
+            document.getElementById("number1").innerText = token;
+            console.log(token)
+            
+            let count = 180
+            setInterval(() => {
+                 if(count > 0){
+                    count = count - 1
+
+                    const minutes = Math.floor(count / 60)
+                    let seconds = count % 60;
+                    // 분, 초 만드는 법
+                    if(seconds < 10){
+                        seconds = String(seconds).padStart(2,"0")
+                    }
+                    // 초에서 00초 만드는 법
+                    document.getElementById("number2").innerText = minutes + ":" + seconds
+                    
+                    // 만들어진 기능을 HTML로 보내기
+                    if(seconds < 59 && minutes === 0) {
+                            document.getElementById("number2").style="color:red"
+                    }
+            }
+
+            if(count === 0) {
+            document.getElementById("authBtn").setAttribute("disabled", true)
+        }
+        }, 1000)
+    }
+    </script>
+    <style>
+        .top {
+            width: 350px;
+            height: 100px;
+            display: flex;
+            border: 1px; red;
+            justify-content: space-around;
+        }
+        #aaa {
+            border-radius: 5px;
+        }
+
+    </style>
+    <title>타이머</title>
+</head>
+<body>
+    <div class="top">
+        <span id="number1">000000</span>
+        <button id="aaa" onclick="send()">인증번호 전송</button>
+    </div>
+    <div bottom><span id="number2">00</span>
+    <span><button id='authBtn'>인증완료</button></span></div>
+    </div>
+</body>
+</html>
+<!-- 3분 타이머임 -->
